@@ -1,0 +1,110 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">
+        HOME JSF Example Page - Overriding the default title
+    </ui:define>
+
+	<ui:define name="content">
+		<h:form enctype="multipart/form-data" id="me">
+
+			<p:growl id="growl" life="2000" />
+
+			<h:outputLabel for="caseNumber" value="Case Number:" />
+			<p:inputText id="caseNumber" value="#{secureCom.caseNumber}"
+				label="caseNumber" />
+
+			<p:commandButton value="Get Case" id="getCase" update="me"
+				actionListener="#{secureCom.getCase}"
+				styleClass="ui-priority-primary" />
+
+			<p:spacer width="100" height="10" />
+
+			<h:outputLabel for="eServiceUserId" value="eService User ID:" />
+			<p:inputText id="eServiceUserId" value="#{secureCom.eServiceUserId}"
+				label="eServiceUserId" />
+
+			<br />
+			<br />
+
+			<h:outputLabel for="messageId" value="Message ID:" />
+			<p:inputText id="messageId" value="#{secureCom.id}" label="messageId" />
+
+			<p:spacer width="100" height="10" />
+
+			<h:outputLabel for="category" value="Category:" />
+			<p:inputText id="category" value="#{secureCom.category}"
+				label="category" />
+
+			<br />
+			<br />
+
+			<h:outputLabel for="awdCreateDateTime" value="AWD Create DateTime:" />
+			<p:inputText id="awdCreateDateTime"
+				value="#{secureCom.awdCreateDateTime}" label="awdCreateDateTime" />
+
+			<p:spacer width="100" height="10" />
+
+			<p:outputLabel for="awdStatus" value="AWD Status:" />
+			<p:selectOneMenu id="awdStatus" value="#{secureCom.awdStatus}"
+				effect="fold">
+				<f:selectItem itemLabel="Select One" itemValue="" />
+				<f:selectItems value="#{secureCom.awdStatuses}" />
+			</p:selectOneMenu>
+
+			<br />
+			<br />
+
+			<h:outputLabel for="subject" value="Subject:" />
+			<br />
+			<p:inputTextarea id="subject" rows="6" cols="33"
+				value="#{secureCom.subject}" label="subject" />
+
+			<br />
+			<br />
+
+			<h:outputLabel for="policyNumber" value="Policy Number:" />
+			<p:inputText id="policyNumber" value="#{secureCom.policyNumber}"
+				label="policyNumber" />
+
+			<br />
+			<br />
+
+			<h:outputLabel for="previousMessagesDataTable"
+				value="Previous Messages:" />
+			<p:dataTable id="previousMessagesDataTable" var="message"
+				value="#{secureCom.messages}">
+				<p:column headerText="Subject">
+					<h:outputText value="#{message.subject}" />
+				</p:column>
+
+				<p:column headerText="Message">
+					<h:outputText value="#{message.replyMessage}" />
+				</p:column>
+
+			</p:dataTable>
+
+			<br />
+			<br />
+			<br />
+			<br />
+
+			<h:outputLabel for="replyMessage" value="Reply Message:" />
+			<br />
+			<p:inputTextarea id="replyMessage" rows="10" cols="80"
+				value="#{secureCom.replyMessage}" label="replyMessage" />
+
+			<p>
+				<p:commandButton value="Save Changes" id="submit" update="growl"
+					actionListener="#{secureCom.submit}"
+					styleClass="ui-priority-primary" />
+			</p>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

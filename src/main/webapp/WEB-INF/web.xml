@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+
+<display-name>JSF - PrimeFaces with JAAS Authentication in Tomcat Example Project</display-name>
+
+    <!--
+        The JSF (MyFaces) Context Listener
+        It usually registers itself (so this declaration would not be needed), but in some old containers, it doesn't.
+        All in all, if it is registered twice (ie in both .tld and web.xml) the result is just a harmless warning
+        message being generated, so we keep it here.
+     -->
+    <listener>
+        <listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
+    </listener>
+
+
+    <!-- ***************************************************************************************************************
+       BEGIN: DEVELOPMENT ENVIRONMENT SETTINGS - Remove these settings when deploying to Production.
+
+     -->
+    <!--See: http://stackoverflow.com/a/21698467/1850609-->
+    <context-param>
+        <description>Defines which packages to scan for beans, separated by commas. Necessary for when using tomcat7:run.</description>
+        <param-name>org.apache.myfaces.annotation.SCAN_PACKAGES</param-name>
+        <param-value>com.aperea</param-value>
+    </context-param>
+
+    <!--See: http://stackoverflow.com/a/7514528/1850609 -->
+    <!-- Time in seconds that facelets should be checked for changes since last request. A value of -1 disables refresh checking. -->
+    <context-param>
+        <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
+        <param-value>0</param-value>
+    </context-param>
+
+    <context-param>
+        <description>
+            Set the project stage to "Development", "UnitTest", "SystemTest", or "Production".
+            An optional parameter that makes troubleshooting errors much easier.
+            You should remove this context parameter before deploying to production!
+        </description>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <!--
+
+     END: DEVELOPMENT ENVIRONMENT SETTINGS
+    **************************************************************************************************************** -->
+
+
+    <!--
+     Default folder files
+     Defines what files should we try to display when a folder is accessed directly.
+     -->
+    <welcome-file-list>
+        <welcome-file>index.xhtml</welcome-file>
+    </welcome-file-list>
+
+
+    <!-- The JSF FacesServlet - The JSF Front Controller, manages the the request processing lifecycle for JSF-->
+    <servlet>
+        <servlet-name>facesServlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+
+    <!-- Maps the file extensions to the JSF FacesServlet -->
+    <servlet-mapping>
+        <servlet-name>facesServlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+
+
+   
+
+</web-app>
